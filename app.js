@@ -28,6 +28,7 @@ app.use(passport.initialize());
 
 passport.use('jwt-user', userJWTStrategy);
 
+app.use(cors({ origin: 'http://localhost:3000', credentials: false }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
