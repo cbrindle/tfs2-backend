@@ -32,7 +32,6 @@ module.exports = {
     },
 
     login: async (req, res) => {
-        console.log(req.body);
         try {
             const foundUser = await User.findOne({ email: req.body.email });
             if (foundUser === null) {
@@ -53,7 +52,6 @@ module.exports = {
                 name: foundUser.name,
                 email: foundUser.email
             }
-            console.log(successObj);
             res.json(successObj)
 
         } catch (err) {
