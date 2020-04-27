@@ -58,5 +58,16 @@ module.exports = {
             console.log(err);
             res.status(500).json(err)
         }
+    },
+
+    getProfile: async (req, res) => {
+        console.log(req.params.userID);
+        try {
+            const foundUser = await User.findById(req.params.userID);
+            res.json(foundUser);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err)
+        }
     }
 }
