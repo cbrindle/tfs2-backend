@@ -7,7 +7,9 @@ module.exports = {
     signUp: async (req, res) => {
         try {
             const newUser = new User({
-                name: req.body.name,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                userName: req.body.userName,
                 email: req.body.email,
                 password: req.body.password
             })
@@ -46,10 +48,9 @@ module.exports = {
             }
 
             const jwtToken = await authHelper.createUserToken(foundUser);
-            console.log(`Success, returning token object...`);
             const successObj = {
                 token: jwtToken,
-                name: foundUser.name,
+                userName: foundUser.userName,
                 email: foundUser.email
             }
             res.json(successObj)
