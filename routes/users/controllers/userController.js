@@ -62,12 +62,42 @@ module.exports = {
     },
 
     getProfile: async (req, res) => {
-        console.log(req.params.userID);
         try {
             const foundUser = await User.findById(req.params.userID);
             res.json(foundUser);
         } catch (err) {
             console.log(err);
+            res.status(500).json(err)
+        }
+    },
+
+    updateProfile: async (req, res) => {
+        try {
+            const foundUser = await User.findOne({ email: req.body.email });
+            if ((!foundUser)) {
+                throw 'User not found'
+            }
+            if (req.body.newFirstName !== '') {
+                foundUser.firstName = req.body.newFirstName;
+            }
+            if (req.body.newLastName !== '') {
+                foundUser.lastName = req.body.newLastName;
+            }
+            if (req.body.newEmail !== '' && req.body.newEmail.includes('@')) {
+                foundUser.email = req.body.newEmail;
+            }
+            if (req.body.newPassword !== '') {
+                foundUser.password = req.body.newPassword;
+            }
+            await foundUser.save();
+            const returnUser = {
+                firstName: foundUser.firstName,
+                lastName: foundUser.lastName,
+                userName: foundUser.userName,
+                email: foundUser.email
+            }
+            res.json(returnUser)
+        } catch (err) {
             res.status(500).json(err)
         }
     }

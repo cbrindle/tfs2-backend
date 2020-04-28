@@ -10,4 +10,7 @@ router.post('/login', userController.login);
 
 router.get('/get-profile/:userID', userController.getProfile);
 
+
+router.post('/update-profile', userController.updateProfile);
+
 module.exports = router;
