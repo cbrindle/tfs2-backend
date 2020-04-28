@@ -77,6 +77,9 @@ module.exports = {
             if ((!foundUser)) {
                 throw 'User not found'
             }
+            if (req.body.newUserName !== '') {
+                foundUser.userName = req.body.newUserName;
+            }
             if (req.body.newFirstName !== '') {
                 foundUser.firstName = req.body.newFirstName;
             }
