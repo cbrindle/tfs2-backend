@@ -35,6 +35,12 @@ module.exports = {
 
     login: async (req, res) => {
         try {
+            if (req.body.email === 'admin' && req.body.password === process.env.ADMIN_PASS) {
+                const adminData = { name: 'Admin', email: 'none', id: 'XXX' }
+                const adminToken = await authHelper.createUserToken(adminData);
+                const adminObj = { token: adminToken, userName: 'Admin', email: 'none' }
+                res.json(adminObj)
+            }
             const foundUser = await User.findOne({ email: req.body.email });
             if (foundUser === null) {
                 console.log(`User not found`);
