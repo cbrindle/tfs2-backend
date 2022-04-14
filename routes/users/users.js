@@ -13,4 +13,7 @@ router.get('/get-profile/:userID', userController.getProfile);
 
 router.post('/update-profile', userController.updateProfile);
 
+
+router.get('/get-all-users', userController.getAllUsers);
+
 module.exports = router;

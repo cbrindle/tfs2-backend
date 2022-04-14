@@ -109,5 +109,15 @@ module.exports = {
         } catch (err) {
             res.status(500).json(err)
         }
+    },
+
+    getAllUsers: async (req, res) => {
+        try {
+            const allUsers = await User.find();
+            res.json(allUsers);
+        } catch (err) {
+            console.log(err);
+            return err
+        }
     }
 }
